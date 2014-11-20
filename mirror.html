@@ -11,13 +11,8 @@
 
   <style>
   @media screen and (min-width: 1000px) {
-    button {
-      display: block;
-    }
-    button, canvas, video {
+    canvas, video {
       border: 3px solid black;
-      clear: both;
-      float: left;
     }
   }
   </style>
@@ -26,10 +21,12 @@
 <body>
 <div id="container">
 
-  <video></video>
-  <button>take pic</button>
-  <canvas></canvas>
-  <img src="" />
+  <video></video><canvas></canvas>
+  <div class="controls">
+    <hr />
+    <button>take pic</button>
+    <img src="" />
+  </div>
 
 </div>
 
