@@ -10,7 +10,7 @@
 		button = document.querySelector('button'),
 		canvas = document.querySelector('canvas'),
 		photo = document.querySelector('img'),
-		width = 320,
+		width = 640,
 		height = 0,
 		isStreaming = false,
 		context = canvas.getContext('2d');

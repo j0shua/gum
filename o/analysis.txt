@@ -1,0 +1,42 @@
+Analysis:
+
+The time magnitude / complexity can be computed based on the parts of the script. These are:
+1. read the input file and parse the input into a list
+2. loop through the list
+a. clean each item
+b. record the position as alpha|number
+c. append to a separate list containing either words|numbers
+3. sort the individual sublists  
+4. loop through the positions and use it to choose the next item from the appropritate sub-list
+5. output to file
+
+1. This is done via the str.split() method. We pass through the file once as a read O(n) then use split which makes a 2nd pass to find newline chars and append all the items into a list. The actual time complexity for this will be determined by the python engine but it could be optimized by reading one char at a time continuously appending to a variable and then pushing the variable onto the list when encountering a newline so both operations can be done in one pass.
+
+2.
+a. This is done with a regex so its O(n) * regex op.
+b. This means creating another list with the same length as the number of input elements O(n). I have created one to size instead of strictly using append since an unbound list that is constantly appending will probably necessetate a large data movement to expnad the length of the data structure and copy items into the newly larger one (unless the internal data strcut is a linked list).
+c. This is constant time since its just a list.append() call, but if memory constraints are not an issue (such as for small lists) it may make sense to do the same pre-initialization of list size as in b above.
+
+3. This is potentially the most computationally expensive operation in the script. Without providing a custom sort method it will use whatever the default python sort is. We can assume it is no worse than n^2 (n squared) which is a poor algorithm. But for better performance we need only provide a custom sort which is more highly optimized (mergesort or quicksort for example) which operate at O n(log(n)).
+
+4. This is another O(n) loop since we're going through the positions list which has lenght == input. 
+
+5. As done in my script this is another O(n) to go through the data and join it. This can be done as part of part4 above while taking the items from the sublist, if we simply output to file then instead of composing a new 'mixed' list.
+
+Therefore as is it is:
+                                       
+1....................... 2n
+2....................... 3n
+3....................... n^2
+4....................... n
+5....................... n 
+total................... 7n * n^2 = n^2
+
+With optimizations however:
+1. read char by char ................................... n
+2. ..................................................... 3n
+3. ..................................................... n(log(n))
+4. read next int|word & output immediately ............. n
+total................................................... 5n(log(n))
+		                                                 =
+		removing constants ............................. n (log(n))

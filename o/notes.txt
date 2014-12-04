@@ -1,0 +1,11 @@
+1) strip all invalid characters
+2) maintain list of positions (number/word)
+3) sort all words and integers
+4) go through list of positions
+5) reassign next char in list
+6) dump all to file in proper order
+
+regex to strip non a-zA-Z0-9- chars:
+
+re.sub(r"[^a-zA-Z0-9\-]*$", r'', 'asdfdsaf99383238')
+
